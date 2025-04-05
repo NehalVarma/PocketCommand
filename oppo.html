@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phone Controller</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #e9ebee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .phone {
+      width: 360px;
+      height: 640px;
+      background: #fff;
+      border: 8px solid #333;
+      border-radius: 30px;
+      padding: 20px 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      justify-content: center;
+      overflow-y: auto;
+    }
+
+    .app {
+      width: 80px;
+      height: 80px;
+      margin: 10px;
+      background: #f0f0f0;
+      border-radius: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 22px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+      transition: 0.2s;
+    }
+
+    .app:hover {
+      background: #d6eaff;
+      transform: scale(1.05);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: -10px;
+      margin-bottom: 15px;
+      width: 100%;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="phone">
+    <h2>📱 VARMA'S OPPO</h2>
+
+    <div class="app" onclick="sendCommand('check_adb')">ADB</div>
+    <div class="app" onclick="sendCommand('volume_up')">🔊</div>
+    <div class="app" onclick="sendCommand('volume_down')">🔉</div>
+    <div class="app" onclick="sendCommand('mute')">🔇</div>
+    <div class="app" onclick="sendCommand('check_battery')">🔋</div>
+    <div class="app" onclick="sendCommand('wifi_on')">📶</div>
+    <div class="app" onclick="sendCommand('wifi_off')">📴</div>
+    <div class="app" onclick="sendCommand('screenshot')">📸</div>
+    <div class="app" onclick="sendCommand('launch_youtube')">▶️</div>
+    <div class="app" onclick="sendCommand('launch_playstore')">🛍️</div>
+    <div class="app" onclick="sendCommand('launch_spotify')">🎵</div>
+    <div class="app" onclick="sendCommand('open_camera')">📷</div>
+    <div class="app" onclick="sendCommand('dial_number')">📞</div>
+    <div class="app" onclick="sendCommand('play_music')">🎶</div>
+    <div class="app" onclick="sendCommand('open_search')">🔍</div>
+    <div class="app" onclick="sendCommand('screen_on')">🔓</div>
+    <div class="app" onclick="sendCommand('screen_off')">🔒</div>
+
+  </div>
+
+  <script>
+    function sendCommand(command) {
+      fetch("http://127.0.0.1:5000/command/" + command)
+        .then(res => res.json())
+        .then(data => alert(data.status))
+        .catch(err => alert("❌ Error: " + err));
+    }
+  </script>
+
+</body>
+</html>
